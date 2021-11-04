@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_main_have_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:id="@+id/table_button_add_material"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="right">
+
+            <Button
+                android:id="@+id/add_material_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Material"
+                app:icon="@drawable/ic_scan_qr" />
+        </TableRow>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Dont have any material here"
+            android:textSize="16sp"
+            android:layout_above="@+id/detail_price"
+            android:layout_below="@+id/table_button_add_material"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_view_main_material"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/detail_price"
+            android:layout_below="@+id/table_button_add_material"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone" />
+
+        <TableRow
+            android:id="@+id/detail_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Price: "
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 0"
+                android:textSize="20dp" />
+        </TableRow>
+    </RelativeLayout>
+
+</RelativeLayout>
