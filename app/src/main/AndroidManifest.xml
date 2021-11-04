@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialStore">
         <activity
-            android:name=".Login_Admin"
+            android:name=".view.Form_Material"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.Login_Admin"
+            android:exported="false" />
+        <activity
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

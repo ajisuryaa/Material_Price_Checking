@@ -1,14 +1,16 @@
-package com.putrabatam.materialstore;
+package com.putrabatam.materialstore.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Login_Admin extends AppCompatActivity {
+import com.putrabatam.materialstore.R;
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_admin);
+        setContentView(R.layout.activity_main);
     }
 }
