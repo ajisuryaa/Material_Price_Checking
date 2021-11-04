@@ -7,7 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.putrabatam.qrstore.controller.DataPart;
+import com.putrabatam.materialstore.controller.DataPart;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
