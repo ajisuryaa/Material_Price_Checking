@@ -2,31 +2,32 @@ package com.putrabatam.materialstore.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
 
 import com.putrabatam.materialstore.R;
 
-public class MainActivity extends AppCompatActivity {
+public class Home_Admin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home_admin);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.mn_login_login:
-                Intent add_material = new Intent(MainActivity.this, Login_Admin.class);
+            case R.id.ha_add_new_material:
+                Intent add_material = new Intent(Home_Admin.this, Form_Material.class);
+                add_material.putExtra("type", "add");
                 startActivity(add_material);
+                finish();
+                return true;
+            case R.id.ha_logout:
+                Intent view_employee = new Intent(Home_Admin.this, MainActivity.class);
+                startActivity(view_employee);
                 finish();
                 return true;
             default:

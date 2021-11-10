@@ -10,11 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialStore">
         <activity
+            android:name=".view.Home_Admin"
+            android:exported="false"
+            android:label="List Material"/>
+        <activity
             android:name=".view.Form_Material"
-            android:exported="false" />
+            android:exported="true"
+            android:label="Form Material"/>
         <activity
             android:name=".view.Login_Admin"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
         <activity
             android:name=".view.MainActivity"
             android:exported="true">
