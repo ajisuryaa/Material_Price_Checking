@@ -3,6 +3,7 @@ package com.putrabatam.materialstore.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    //Code Program pada Method dibawah ini akan Berjalan saat Option Menu Dibuat
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Memanggil/Memasang menu item pada toolbar dari layout menu_bar.xml
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_login, menu);
+        return true;
     }
 
     @Override

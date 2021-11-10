@@ -24,7 +24,8 @@
             />
         <activity
             android:name=".view.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Cek Harga Material">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

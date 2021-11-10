@@ -11,5 +11,7 @@
     <color name="BlueMain">#142484</color>
     <color name="BlueMainDark">#040f54</color>
     <color name="colorTextWhite">#ffffff</color>
+    <color name="colorYellow">#FFFB7804</color>
     <color name="colorText">#292929</color>
+    <color name="RedMain">#FFf50a25</color>
 </resources>
