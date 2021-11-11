@@ -55,13 +55,6 @@
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/txt_id_material_clm"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:text="000" />
-
                 </TableRow>
 
                 <TableRow
@@ -70,48 +63,33 @@
                     android:layout_marginTop="5dp">
 
                     <TextView
-                        android:id="@+id/lbl_kmin_clm"
+                        android:id="@+id/lbl_harga_clm"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="kmin:" />
+                        android:text="Harga: " />
 
                     <TextView
-                        android:id="@+id/txt_kmin_material_clm"
+                        android:id="@+id/txt_harga_material_clm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="5dp"
                         android:ellipsize="none"
-                        android:text="0" />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="kmax:" />
-
-                    <TextView
-                        android:id="@+id/txt_kmax_material_clm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginRight="5dp"
-                        android:text="0" />
+                        android:text="Rp 0"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="stok:" />
+                        android:text="/" />
 
                     <TextView
-                        android:id="@+id/txt_curr_material_clm"
+                        android:id="@+id/txt_satuan_material_clm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginRight="5dp"
-                        android:text="0" />
+                        android:text="Kg" />
 
                 </TableRow>
 

@@ -62,10 +62,8 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
     public void onBindViewHolder(@NonNull PastBookingViewHolder holder, final int position) {
         Log.i("Address Image Material", Server_Configuration.address_image + dataList.get(holder.getAdapterPosition()).photo_address);
         holder.nama_material.setText(dataList.get(holder.getAdapterPosition()).name);
-        holder.id_material.setText("(" + dataList.get(holder.getAdapterPosition()).id + ")");
-        holder.kmin.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).kmin));
-        holder.kmax.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).kmax));
-        holder.curr.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).current_stock));
+        holder.harga.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).price));
+        holder.satuan.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).satuan));
 //        Picasso.get().load(Server_Configuration.address_image + dataList.get(position).photo)
 //                .into(holder.foto_pegawai);
         Picasso.get()
@@ -78,10 +76,11 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
             public void onClick(View v) {
                 Intent edit_material = new Intent(v.getContext(), Form_Material.class);
                 edit_material.putExtra("type", "edit");
-                edit_material.putExtra("material_id", dataList.get(holder.getAdapterPosition()).id);
-                edit_material.putExtra("material_name", dataList.get(holder.getAdapterPosition()).name);
-                edit_material.putExtra("material_photo", Server_Configuration.address_image + dataList.get(holder.getAdapterPosition()).photo_address);
-                edit_material.putExtra("harga", dataList.get(holder.getAdapterPosition()).kmax);
+                edit_material.putExtra("id", dataList.get(holder.getAdapterPosition()).id);
+                edit_material.putExtra("name", dataList.get(holder.getAdapterPosition()).name);
+                edit_material.putExtra("satuan", dataList.get(holder.getAdapterPosition()).satuan);
+                edit_material.putExtra("price", dataList.get(holder.getAdapterPosition()).price);
+                edit_material.putExtra("photo", Server_Configuration.address_image + dataList.get(holder.getAdapterPosition()).photo_address);
                 ((Activity)v.getContext()).finish();
                 v.getContext().startActivity(edit_material);
             }
@@ -168,17 +167,15 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
     }
 
     public class PastBookingViewHolder extends RecyclerView.ViewHolder{
-        TextView nama_material, id_material;
-        TextView kmin, kmax, curr;
+        TextView nama_material;
+        TextView harga, satuan;
         ImageButton ubah, hapus;
         ImageView foto_material;
         public PastBookingViewHolder(View itemView, final int position) {
             super(itemView);
             this.nama_material = itemView.findViewById(R.id.txt_name_material_clm);
-            this.id_material = itemView.findViewById(R.id.txt_id_material_clm);
-            this.kmin = itemView.findViewById(R.id.txt_kmin_material_clm);
-            this.kmax = itemView.findViewById(R.id.txt_kmax_material_clm);
-            this.curr = itemView.findViewById(R.id.txt_curr_material_clm);
+            this.harga = itemView.findViewById(R.id.txt_harga_material_clm);
+            this.satuan = itemView.findViewById(R.id.txt_satuan_material_clm);
             this.ubah = itemView.findViewById(R.id.btn_edit_material_clm);
             this.hapus = itemView.findViewById(R.id.btn_hapus_material_clm);
             this.foto_material = itemView.findViewById(R.id.image_view_material_clm);

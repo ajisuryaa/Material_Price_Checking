@@ -28,13 +28,15 @@ public class Material {
     }
 
     public String validation_adding_material(){
-        if(id.equals("") || id.length()<=0 || id.isEmpty()){
-            return "ID material tidak boleh kosong";
-        } else if(name.equals("") || name.length()<=0 || name.isEmpty()){
+        if(name.equals("") || name.length()<=0 || name.isEmpty()){
             return "Nama material tidak boleh kosong";
         } else if(price == 0){
-            return "KMIN material tidak boleh kosong";
-        }  else {
+            return "Harga material tidak boleh kosong";
+        } else if(satuan.equals("") || name.length()<=0 || name.isEmpty()){
+            return "Satuan material tidak boleh kosong";
+        } else if(photo == null){
+            return "Foto material tidak boleh kosong";
+        } else {
             return "done";
         }
     }
