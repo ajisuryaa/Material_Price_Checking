@@ -2,8 +2,8 @@ package com.putrabatam.materialstore.utils;
 
 public class Server_Configuration {
     //local_server
-    public static final String address_server = "https://192.168.1.13/API_STORE_MATERIAL/view/";
-    public static final String address_image = "http://192.168.1.13/API_STORE_MATERIAL/";
+    public static final String address_server = "https://192.168.1.33/API_STORE_MATERIAL/view/";
+    public static final String address_image = "http://192.168.1.33/API_STORE_MATERIAL/";
 
     //hosting_server
     //public static final String address_server = "https://qrstoreapps.000webhostapp.com/view/";

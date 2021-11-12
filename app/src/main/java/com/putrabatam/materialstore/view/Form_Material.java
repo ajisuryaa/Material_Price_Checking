@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +44,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -99,7 +107,9 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
                         Integer.valueOf(harga.getText().toString()),
                         satuan.getText().toString()
                 );
-
+                Log.i("Nama", data_material.name);
+                Log.i("Satuan", data_material.satuan);
+                Log.i("Harga", String.valueOf(data_material.price));
                 String return_validation = data_material.validation_adding_material();
                 if(return_validation.equals("done")){
                     if(form_page.getStringExtra("type").equals("edit")){
@@ -184,7 +194,7 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("name", material.id);
+                params.put("name", material.name);
                 params.put("satuan", material.satuan);
                 params.put("price", String.valueOf(material.price));
                 return params;
@@ -300,6 +310,64 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
                 return true;
             default:
                 return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                File f = new File(Environment.getExternalStorageDirectory().toString());
+                for (File temp : f.listFiles()) {
+                    if (temp.getName().equals("temp.jpg")) {
+                        f = temp;
+                        break;
+                    }
+                }
+                try {
+                    Bitmap bitmap;
+                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(), bitmapOptions);
+                    bitmap= ImageHandler.getResizedBitmap(bitmap, 400);
+                    material_photo.setImageBitmap(bitmap);
+                    string_image = ImageHandler.BitMapToString(bitmap);
+                    String path = android.os.Environment
+                            .getExternalStorageDirectory()
+                            + File.separator
+                            + "Phoenix" + File.separator + "default";
+                    f.delete();
+                    OutputStream outFile = null;
+                    File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
+                    try {
+                        outFile = new FileOutputStream(file);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
+                        outFile.flush();
+                        outFile.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (requestCode == 2) {
+                Uri selectedImage = data.getData();
+                String[] filePath = { MediaStore.Images.Media.DATA };
+                Cursor c = getContentResolver().query(selectedImage,filePath, null, null, null);
+                c.moveToFirst();
+                int columnIndex = c.getColumnIndex(filePath[0]);
+                String picturePath = c.getString(columnIndex);
+                c.close();
+                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                thumbnail= ImageHandler.getResizedBitmap(thumbnail, 400);
+                Log.w("path of image from gallery......******************.........", picturePath+"");
+                material_photo.setImageBitmap(thumbnail);
+                string_image = ImageHandler.BitMapToString(thumbnail);
+            }
         }
     }
 }
