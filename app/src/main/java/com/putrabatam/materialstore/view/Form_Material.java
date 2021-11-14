@@ -102,6 +102,7 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
                 Bitmap bitmap = drawable.getBitmap();
                 Material data_material = new Material();
                 data_material.set_material(
+                        id_material,
                         name.getText().toString(),
                         bitmap,
                         Integer.valueOf(harga.getText().toString()),
@@ -126,7 +127,7 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
 
     //Load data material untuk halaman edit
     private void set_form_page(Intent form_page){
-        Picasso.get().load(form_page.getStringExtra("material_photo")).into(new Target() {
+        Picasso.get().load(form_page.getStringExtra("photo")).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 // Set it in the ImageView
@@ -142,10 +143,10 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
             public void onPrepareLoad(Drawable placeHolderDrawable) {
             }
         });
-        id_material = form_page.getStringExtra("material_id");
-        name.setText(form_page.getStringExtra("nama"));
-        satuan.setText(String.valueOf(form_page.getIntExtra("satuan", 0)));
-        harga.setText(String.valueOf(form_page.getIntExtra("harga", 0)));
+        id_material = form_page.getStringExtra("id");
+        name.setText(form_page.getStringExtra("name"));
+        satuan.setText(form_page.getStringExtra("satuan"));
+        harga.setText(String.valueOf(form_page.getIntExtra("price", 0)));
     }
 
     //Fungsi untuk mengirim data material baru

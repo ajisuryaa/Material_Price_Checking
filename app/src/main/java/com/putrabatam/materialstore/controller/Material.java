@@ -20,7 +20,8 @@ public class Material {
         this.satuan = satuan;
     }
 
-    public void set_material(String name, Bitmap photo, int price, String satuan){
+    public void set_material(String id, String name, Bitmap photo, int price, String satuan){
+        this.id = id;
         this.name = name;
         this.photo = photo;
         this.price = price;
