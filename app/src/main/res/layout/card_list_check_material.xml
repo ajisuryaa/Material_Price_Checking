@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_artikel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="5dp"
+    card_view:cardCornerRadius="6dp"
+    card_view:cardElevation="5dp"
+    card_view:cardMaxElevation="5dp"
+    card_view:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="right"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_close_clc"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/custom_btn_red"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                card_view:srcCompat="@drawable/ic_close"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_view_material_clc"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                card_view:srcCompat="@android:color/holo_green_dark" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txt_name_material_clc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:text="Material Name"
+                        android:textColor="@color/colorText"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/lbl_harga_clc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Harga: " />
+
+                    <TextView
+                        android:id="@+id/txt_harga_material_clc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="5dp"
+                        android:ellipsize="none"
+                        android:text="Rp 0"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lbl_satuan_clc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/" />
+
+                    <TextView
+                        android:id="@+id/txt_satuan_material_clc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kg" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|right"
+                    android:padding="5dp">
+
+                    <ImageButton
+                        android:id="@+id/btn_add_clc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/custom_btn_white"
+                        android:elevation="5dp"
+                        android:padding="5dp"
+                        card_view:srcCompat="@drawable/ic_minus"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                    <EditText
+                        android:id="@+id/et_amount_clc"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:text="1"
+                        android:textAlignment="center"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                    <ImageButton
+                        android:id="@+id/btn_min_clc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/custom_btn_white"
+                        android:elevation="5dp"
+                        android:padding="5dp"
+                        card_view:srcCompat="@drawable/ic_add_amount"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                </TableRow>
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

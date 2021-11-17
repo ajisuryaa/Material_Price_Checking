@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable-v24/custom_btn_white.xml" value="0.12447916666666667" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/custom_btn_blue.xml" value="0.16574074074074074" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/custom_btn_red.xml" value="0.12447916666666667" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/custom_btn_yellow.xml" value="0.12447916666666667" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/ic_add.xml" value="0.19444444444444445" />
+        <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/ic_add_amount.xml" value="0.12447916666666667" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/ic_delete_white.xml" value="0.12447916666666667" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/ic_edit_white.xml" value="0.12447916666666667" />
+        <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/ic_minus.xml" value="0.12447916666666667" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/ic_scan_qr.xml" value="0.16574074074074074" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/image_view_style.xml" value="0.1361111111111111" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/drawable/round_btn.xml" value="0.12447916666666667" />
@@ -16,6 +19,7 @@
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/layout/activity_home_admin.xml" value="0.22135416666666666" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/layout/activity_login_admin.xml" value="0.2727272668160684" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/layout/activity_main.xml" value="0.19636363210756924" />
+        <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/layout/card_list_check_material.xml" value="0.23999999479814021" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/layout/card_list_material.xml" value="0.21818181345285476" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/layout/edit_text_style.xml" value="0.11018518518518519" />
         <entry key="..\:/Seni-digital/flutter_project/Testing project/MaterialStore/app/src/main/res/menu/menu_choose_image.xml" value="0.10833333333333334" />

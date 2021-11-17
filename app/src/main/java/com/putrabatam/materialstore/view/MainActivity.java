@@ -1,14 +1,8 @@
 package com.putrabatam.materialstore.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,9 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -55,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
     TextView emplty_list_material;
     Button scanner_kode_qr;
 
-    private Card_List_Material adapter;
+    private Card_List_Check_Material adapter;
+    private RecyclerView.AdapterDataObserver myObserver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,18 +63,19 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(MainActivity.this);
         scanner_kode_qr = findViewById(R.id.scan_material_main);
         rv_list_material = findViewById(R.id.list_view_main_material);
-        adapter = new Card_List_Material(list_material);
+        adapter = new Card_List_Check_Material(list_material);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         rv_list_material.setLayoutManager(layoutManager);
         rv_list_material.setAdapter(adapter);
         rv_list_material.setActivated(true);
 
-        if(!list_material.isEmpty()){
+        if(list_material.size() > 0){
             rv_list_material.setVisibility(View.VISIBLE);
             emplty_list_material.setVisibility(View.GONE);
         }
 
         emplty_list_material = findViewById(R.id.empty_material_main);
+        
         scanner_kode_qr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
