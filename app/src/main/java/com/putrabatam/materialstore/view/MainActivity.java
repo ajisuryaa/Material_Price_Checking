@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Material> list_material = new ArrayList<Material>();
 
     RecyclerView rv_list_material;
-    TextView emplty_list_material;
+    TextView emplty_list_material, total_price;
     Button scanner_kode_qr;
 
     private Card_List_Check_Material adapter;
@@ -63,18 +63,22 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(MainActivity.this);
         scanner_kode_qr = findViewById(R.id.scan_material_main);
         rv_list_material = findViewById(R.id.list_view_main_material);
+        total_price = findViewById(R.id.total_price_main);
+        emplty_list_material = findViewById(R.id.empty_material_main);
+
         adapter = new Card_List_Check_Material(list_material);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         rv_list_material.setLayoutManager(layoutManager);
         rv_list_material.setAdapter(adapter);
         rv_list_material.setActivated(true);
-
-        if(list_material.size() > 0){
+        
+        if(adapter.getItemCount() > 0){
             rv_list_material.setVisibility(View.VISIBLE);
             emplty_list_material.setVisibility(View.GONE);
+        } else{
+            rv_list_material.setVisibility(View.GONE);
+            emplty_list_material.setVisibility(View.VISIBLE);
         }
-
-        emplty_list_material = findViewById(R.id.empty_material_main);
         
         scanner_kode_qr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,9 +117,11 @@ public class MainActivity extends AppCompatActivity {
                                     reqHandler.data_object.getString("name"),
                                     reqHandler.data_object.getString("photo"),
                                     Integer.valueOf(reqHandler.data_object.getString("harga")),
-                                    reqHandler.data_object.getString("satuan")
+                                    reqHandler.data_object.getString("satuan"),
+                                    1
                             );
                             list_material.add(data_material);
+                            total_price.setText(String.valueOf(data_material.get_total_price(list_material)));
                             if(!list_material.isEmpty()){
                                 rv_list_material.setVisibility(View.VISIBLE);
                                 emplty_list_material.setVisibility(View.GONE);

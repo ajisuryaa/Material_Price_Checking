@@ -95,7 +95,8 @@ public class Home_Admin extends AppCompatActivity {
                                                     data_material.getString("nama_material"),
                                                     data_material.getString("photo"),
                                                     data_material.getInt("harga_material"),
-                                                    data_material.getString("satuan_material")
+                                                    data_material.getString("satuan_material"),
+                                                    0
                                             );
                                             materialArrayList.add(material);
                                             showListMaterial.add(material);
