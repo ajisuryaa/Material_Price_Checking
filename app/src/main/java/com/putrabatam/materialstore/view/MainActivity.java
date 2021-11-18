@@ -167,16 +167,20 @@ public class MainActivity extends AppCompatActivity {
                                     1
                             );
                             int current_size = list_material.size();
-                            list_material.add(data_material);
-                            rv_list_material.scrollToPosition(list_material.size()-1);
-                            //total_price.setText(String.valueOf(data_material.get_total_price(list_material)));
-                            if(!list_material.isEmpty()){
-                                rv_list_material.setVisibility(View.VISIBLE);
-                                emplty_list_material.setVisibility(View.GONE);
+                            if(data_material.get_list_id(list_material).contains(data_material.id)){
+                                Toast.makeText(MainActivity.this, "Material already exist", Toast.LENGTH_LONG).show();
+                            } else{
+                                list_material.add(data_material);
+                                rv_list_material.scrollToPosition(list_material.size()-1);
+                                //total_price.setText(String.valueOf(data_material.get_total_price(list_material)));
+                                if(!list_material.isEmpty()){
+                                    rv_list_material.setVisibility(View.VISIBLE);
+                                    emplty_list_material.setVisibility(View.GONE);
+                                }
+                                Log.i("Count Data", String.valueOf(list_material.size()));
+                                adapter.notifyItemInserted(list_material.size());
+                                adapter.notifyItemRangeChanged(current_size, list_material.size());
                             }
-                            Log.i("Count Data", String.valueOf(list_material.size()));
-                            adapter.notifyItemInserted(list_material.size());
-                            adapter.notifyItemRangeChanged(current_size, list_material.size());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

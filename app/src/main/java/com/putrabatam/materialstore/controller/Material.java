@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class Material {
@@ -68,5 +69,13 @@ public class Material {
         } else {
             return "done";
         }
+    }
+
+    public List get_list_id(ArrayList<Material> list_material){
+        List id_list = new ArrayList();
+        for(int i = 0; i < list_material.size(); i++){
+            id_list.add(list_material.get(i).id);
+        }
+        return id_list;
     }
 }
