@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     Button scanner_kode_qr;
 
     private Card_List_Check_Material adapter;
-    private RecyclerView.AdapterDataObserver myObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +68,53 @@ public class MainActivity extends AppCompatActivity {
         adapter = new Card_List_Check_Material(list_material);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         rv_list_material.setLayoutManager(layoutManager);
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                Log.i("ON item range inserted", "true");
+                Material material = new Material();
+                total_price.setText(String.valueOf(material.formatRupiah(material.get_total_price(adapter.dataList))));
+                list_material = adapter.dataList;
+                if(adapter.getItemCount() > 0){
+                    rv_list_material.setVisibility(View.VISIBLE);
+                    emplty_list_material.setVisibility(View.GONE);
+                } else{
+                    rv_list_material.setVisibility(View.GONE);
+                    emplty_list_material.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                Log.i("ON item range inserted", "true");
+                Material material = new Material();
+                total_price.setText(String.valueOf(material.formatRupiah(material.get_total_price(adapter.dataList))));
+                list_material = adapter.dataList;
+                if(adapter.getItemCount() > 0){
+                    rv_list_material.setVisibility(View.VISIBLE);
+                    emplty_list_material.setVisibility(View.GONE);
+                } else{
+                    rv_list_material.setVisibility(View.GONE);
+                    emplty_list_material.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onItemRangeRemoved(int positionStart, int itemCount) {
+                super.onItemRangeRemoved(positionStart, itemCount);
+                Log.i("ON item range removed", "true");
+                Material material = new Material();
+                total_price.setText(String.valueOf(material.formatRupiah(material.get_total_price(adapter.dataList))));
+                list_material = adapter.dataList;
+                if(adapter.getItemCount() > 0){
+                    rv_list_material.setVisibility(View.VISIBLE);
+                    emplty_list_material.setVisibility(View.GONE);
+                } else{
+                    rv_list_material.setVisibility(View.GONE);
+                    emplty_list_material.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         rv_list_material.setAdapter(adapter);
         rv_list_material.setActivated(true);
         
@@ -120,14 +166,17 @@ public class MainActivity extends AppCompatActivity {
                                     reqHandler.data_object.getString("satuan"),
                                     1
                             );
+                            int current_size = list_material.size();
                             list_material.add(data_material);
-                            total_price.setText(String.valueOf(data_material.get_total_price(list_material)));
+                            rv_list_material.scrollToPosition(list_material.size()-1);
+                            //total_price.setText(String.valueOf(data_material.get_total_price(list_material)));
                             if(!list_material.isEmpty()){
                                 rv_list_material.setVisibility(View.VISIBLE);
                                 emplty_list_material.setVisibility(View.GONE);
                             }
                             Log.i("Count Data", String.valueOf(list_material.size()));
                             adapter.notifyItemInserted(list_material.size());
+                            adapter.notifyItemRangeChanged(current_size, list_material.size());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

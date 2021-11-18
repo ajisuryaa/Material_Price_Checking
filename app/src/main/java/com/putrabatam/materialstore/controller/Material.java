@@ -2,7 +2,9 @@ package com.putrabatam.materialstore.controller;
 
 import android.graphics.Bitmap;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Material {
     public String id, name, photo_address;
@@ -13,6 +15,20 @@ public class Material {
 
     public Material(){
 
+    }
+
+    public String formatRupiah(int number){
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+        return formatRupiah.format(number);
+    }
+
+    public void set_quantity(int quantity){
+        this.quantity = quantity;
+    }
+
+    public int get_quantity(){
+        return quantity;
     }
 
     public Material(String id, String name, String photo, int price, String satuan, int quantity){

@@ -126,7 +126,7 @@
                     android:padding="5dp">
 
                     <ImageButton
-                        android:id="@+id/btn_add_clc"
+                        android:id="@+id/btn_min_quantity_clc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -138,7 +138,7 @@
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                     <EditText
-                        android:id="@+id/et_amount_clc"
+                        android:id="@+id/et_quantity_clc"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -148,7 +148,7 @@
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                     <ImageButton
-                        android:id="@+id/btn_min_clc"
+                        android:id="@+id/btn_add_quantity_clc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

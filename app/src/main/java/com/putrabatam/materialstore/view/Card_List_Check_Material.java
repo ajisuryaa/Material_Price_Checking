@@ -1,12 +1,8 @@
 package com.putrabatam.materialstore.view;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.DataSetObserver;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +39,7 @@ import java.util.Map;
 
 public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Check_Material.PastBookingViewHolder>{
     ProgressDialog progressDialog;
-    private ArrayList<Material> dataList;
+    ArrayList<Material> dataList;
     private Card_List_Check_Material adapter;
 
     public Card_List_Check_Material(ArrayList<Material> dataList) {
@@ -61,44 +57,54 @@ public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Che
 
     @Override
     public void onBindViewHolder(@NonNull PastBookingViewHolder holder, final int position) {
+        Material data_material = dataList.get(holder.getAdapterPosition());
         Log.i("Address Image Material", Server_Configuration.address_image + dataList.get(holder.getAdapterPosition()).photo_address);
-        holder.nama_material.setText(dataList.get(holder.getAdapterPosition()).name);
-        holder.harga.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).price));
-        holder.satuan.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).satuan));
+        holder.nama_material.setText(data_material.name);
+        holder.harga.setText(String.valueOf(data_material.formatRupiah(data_material.price)));
+        holder.satuan.setText(data_material.satuan);
 //        Picasso.get().load(Server_Configuration.address_image + dataList.get(position).photo)
 //                .into(holder.foto_pegawai);
         Picasso.get()
-                .load(Server_Configuration.address_image + dataList.get(holder.getAdapterPosition()).photo_address)
+                .load(Server_Configuration.address_image + data_material.photo_address)
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(holder.foto_material);
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int current_quantity = dataList.get(holder.getAdapterPosition()).quantity;
+                int new_quantity = current_quantity + 1;
+                Log.i("Current Quantity", String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
+                data_material.set_quantity(new_quantity);
+                dataList.set(holder.getAdapterPosition(), data_material);
+                holder.quantity.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
+                Log.i("New Quantity", String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
+                adapter.notifyDataSetChanged();
+            }
+        });
+        holder.min.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int current_quantity = dataList.get(holder.getAdapterPosition()).quantity;
+                int new_quantity = current_quantity - 1;
+                if(new_quantity >= 1){
+                    Log.i("Current Quantity", String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
+                    data_material.set_quantity(new_quantity);
+                    dataList.set(holder.getAdapterPosition(), data_material);
+                    holder.quantity.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
+                    Log.i("New Quantity", String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
         holder.close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dataList.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
+                adapter.notifyItemRemoved(holder.getAdapterPosition());
+                adapter.notifyItemRangeChanged(holder.getAdapterPosition(), dataList.size());
             }
         });
-    }
-
-    public void Delete_Material(String id_material, Context context){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Pesan Konfirmasi")
-                .setMessage("Apakah anda yakin ingin menghapus material " + id_material + "?")
-                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Request_delete_material(context, id_material);
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     private void Request_delete_material(Context context, String id_material) {
@@ -156,7 +162,7 @@ public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Che
     public class PastBookingViewHolder extends RecyclerView.ViewHolder{
         TextView nama_material;
         TextView harga, satuan;
-        EditText amount;
+        EditText quantity;
         ImageButton add, min, close;
         ImageView foto_material;
         public PastBookingViewHolder(View itemView, final int position) {
@@ -165,9 +171,9 @@ public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Che
             this.harga = itemView.findViewById(R.id.txt_harga_material_clc);
             this.satuan = itemView.findViewById(R.id.txt_satuan_material_clc);
             this.foto_material = itemView.findViewById(R.id.image_view_material_clc);
-            this.add = itemView.findViewById(R.id.btn_add_clc);
-            this.min = itemView.findViewById(R.id.btn_min_clc);
-            this.amount = itemView.findViewById(R.id.et_amount_clc);
+            this.add = itemView.findViewById(R.id.btn_add_quantity_clc);
+            this.min = itemView.findViewById(R.id.btn_min_quantity_clc);
+            this.quantity = itemView.findViewById(R.id.et_quantity_clc);
             this.close = itemView.findViewById(R.id.btn_close_clc);
         }
     }
