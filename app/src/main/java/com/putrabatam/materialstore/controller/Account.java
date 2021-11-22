@@ -5,70 +5,21 @@ import android.graphics.Bitmap;
 import com.putrabatam.materialstore.utils.ImageHandler;
 
 public class Account {
-    public String badge_number, email, username, name, password, conf_pass, type_account, photo;
-    public String employee_position;
+    public String username, password, name_account;
 
-    public void setAccountEmployee(String badge_number, String name, String password,
-                                   String conf_pass, String employee_position){
-        this.badge_number = badge_number;
-        this.name = name;
-        this.password = password;
+    public Account(){
+
     }
 
-    public void setParseListEmployee(String id, String name, String password, String photo, String employee_position){
-        this.badge_number = id;
-        this.name = name;
-        this.password = password;
-        this.photo = photo;
-        this.employee_position = employee_position;
-    }
-
-    public void setUsername(String username) {
+    public Account(String username, String password){
         this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setType_account(String type_account) {
-        this.type_account = type_account;
-    }
-
-    public String getType_account() {
-        return type_account;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setEmployee_position(String employee_position) {
-        this.employee_position = employee_position;
-    }
-
-    public String getEmployee_position() {
-        return employee_position;
+    public Account(String username, String password, String name_account){
+        this.username = username;
+        this.password = password;
+        this.name_account = name_account;
     }
 
     public String validation_login(Account data){
@@ -85,21 +36,4 @@ public class Account {
             return "lolos validasi";
         }
     }
-
-    public String validation_register_account(){
-        if(badge_number.equals("") || badge_number.length() <= 0 || badge_number.isEmpty()){
-            return "Nomor badge pegawai tidak boleh kosong";
-        } else if(name.equals("") || name.length()<=0 || name.isEmpty()){
-            return "Nama pegawai tidak boleh kosong";
-        } else if(password.equals("") || password.length()<=0 || password.isEmpty()){
-            return "Kata sandi tidak boleh kosong";
-        } else if(conf_pass.equals("") || conf_pass.length()<=0 || conf_pass.isEmpty()){
-            return "Ketik ulang kata sandi anda";
-        } else if(!conf_pass.equals(password)){
-            return "Konfirmasi kata sandi anda harus sama";
-        } else{
-            return "done";
-        }
-    }
-
 }

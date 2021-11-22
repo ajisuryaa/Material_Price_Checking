@@ -25,7 +25,7 @@
                 android:id="@+id/scan_material_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Material"
+                android:text="SCAN"
                 app:icon="@drawable/ic_scan_qr" />
         </TableRow>
 
@@ -40,7 +40,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="Dont have any material here"
+            android:text="Belum ada material"
             android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -69,7 +69,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Price: "
+                android:text="Total Harga: "
                 android:textSize="20dp"
                 android:textStyle="bold" />
 

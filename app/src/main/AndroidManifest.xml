@@ -22,11 +22,13 @@
         <activity
             android:name=".view.Home_Admin"
             android:exported="false"
-            android:label="List Material"/>
+            android:label="List Material"
+            android:theme="@style/Theme.MaterialStore"/>
         <activity
             android:name=".view.Form_Material"
             android:exported="true"
-            android:label="Form Material"/>
+            android:label="Form Material"
+            android:theme="@style/Theme.MaterialStore"/>
         <activity
             android:name=".view.Login_Admin"
             android:exported="true"
@@ -52,7 +54,8 @@
         <activity
             android:name=".view.MainActivity"
             android:exported="true"
-            android:label="Cek Harga Material">
+            android:label="Cek Harga Material"
+            android:theme="@style/Theme.MaterialStore">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         rv_list_material.setLayoutManager(layoutManager);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
             @Override
             public void onChanged() {
                 Log.i("ON item range inserted", "true");

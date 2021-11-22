@@ -60,16 +60,15 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
 
     @Override
     public void onBindViewHolder(@NonNull PastBookingViewHolder holder, final int position) {
-        Log.i("Address Image Material", Server_Configuration.address_image + dataList.get(holder.getAdapterPosition()).photo_address);
-        holder.nama_material.setText(dataList.get(holder.getAdapterPosition()).name);
-        holder.harga.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).price));
-        holder.satuan.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).satuan));
+        Material data_material = dataList.get(holder.getAdapterPosition());
+        Log.i("Address Image Material", Server_Configuration.address_image + data_material.photo_address);
+        holder.nama_material.setText(data_material.name);
+        holder.harga.setText(String.valueOf(data_material.formatRupiah(data_material.price)));
+        holder.satuan.setText(String.valueOf(data_material.satuan));
 //        Picasso.get().load(Server_Configuration.address_image + dataList.get(position).photo)
 //                .into(holder.foto_pegawai);
         Picasso.get()
-                .load(Server_Configuration.address_image + dataList.get(holder.getAdapterPosition()).photo_address)
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .load(Server_Configuration.address_image + data_material.photo_address)
                 .into(holder.foto_material);
         holder.ubah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,15 +89,15 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
             @Override
             public void onClick(View v) {
                 Log.i("Hapus Material: ", dataList.get(holder.getAdapterPosition()).id);
-                Delete_Material(dataList.get(holder.getAdapterPosition()).id, v.getContext());
+                Delete_Material(dataList.get(holder.getAdapterPosition()).name, v.getContext());
             }
         });
     }
 
-    public void Delete_Material(String id_material, Context context){
+    public void Delete_Material(String nama_material, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Pesan Konfirmasi")
-                .setMessage("Apakah anda yakin ingin menghapus material " + id_material + "?")
+                .setMessage("Apakah anda yakin ingin menghapus material " + nama_material + "?")
                 .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -108,7 +107,7 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Request_delete_material(context, id_material);
+                        Request_delete_material(context, nama_material);
                     }
                 });
         AlertDialog dialog = builder.create();

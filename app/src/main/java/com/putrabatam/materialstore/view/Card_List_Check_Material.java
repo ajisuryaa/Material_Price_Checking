@@ -66,8 +66,6 @@ public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Che
 //                .into(holder.foto_pegawai);
         Picasso.get()
                 .load(Server_Configuration.address_image + data_material.photo_address)
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(holder.foto_material);
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +77,7 @@ public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Che
                 dataList.set(holder.getAdapterPosition(), data_material);
                 holder.quantity.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
                 Log.i("New Quantity", String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
+                adapter.notifyItemChanged(holder.getAdapterPosition());
                 adapter.notifyDataSetChanged();
             }
         });
@@ -93,6 +92,7 @@ public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Che
                     dataList.set(holder.getAdapterPosition(), data_material);
                     holder.quantity.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
                     Log.i("New Quantity", String.valueOf(dataList.get(holder.getAdapterPosition()).quantity));
+                    adapter.notifyItemChanged(holder.getAdapterPosition());
                     adapter.notifyDataSetChanged();
                 }
             }

@@ -26,17 +26,6 @@ public class SharedPreferencesManager {
         return null;
     }
 
-    public void set_account_session(SharedPreferences sharedPreferences, Account data_akun){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("session_status", true);
-        editor.putString("username", data_akun.getUsername());
-        editor.putString("name", data_akun.getName());
-        editor.putString("password", data_akun.getPassword());
-        editor.putString("photo", data_akun.getPhoto());
-        editor.putString("employee_position", data_akun.getEmployee_position());
-        editor.putString("type_account", data_akun.getType_account());
-        editor.commit();
-    }
     public void logout_session(SharedPreferences sharedPreferences){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("session_status", false);
