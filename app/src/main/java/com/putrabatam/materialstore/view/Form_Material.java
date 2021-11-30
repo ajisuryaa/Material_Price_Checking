@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -70,6 +71,7 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
 
     public final int REQUEST_CAMERA_CAPTURE = 1;
     public final int REQUEST_IMAGE_GALLERY = 2;
+    Uri image_uri;
 
     private String string_image = "";
     private String id_material = "";
@@ -311,15 +313,23 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
         return true;
     }
 
+    private void openCamera() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
+        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        //Camera intent
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        CameraActivityResultLauncher.launch(cameraIntent);
+    }
+
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.choose_camera:
                 // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
-                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-                CameraActivityResultLauncher.launch(camera_intent);
+                openCamera();
                 return true;
             case R.id.choose_folder:
                 Intent gallery_intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -366,41 +376,25 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK) {
-                        File f = new File(Environment.getExternalStorageDirectory().toString());
-                        for (File temp : f.listFiles()) {
-                            if (temp.getName().equals("temp.jpg")) {
-                                f = temp;
-                                break;
-                            }
-                        }
-                        try {
-                            Bitmap bitmap;
-                            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-                            bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-                                    bitmapOptions);
-                            Bitmap scaledBitmap = scaleDown(bitmap, 300, true);
-                            material_photo.setImageBitmap(scaledBitmap);
-                            String path = android.os.Environment
-                                    .getExternalStorageDirectory()
-                                    + File.separator
-                                    + "Phoenix" + File.separator + "default";
-                            f.delete();
-                            OutputStream outFile = null;
-                            File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
+                        Uri fileUri = image_uri;
+                        String selectedImagePath = getPath(getApplicationContext(), fileUri);
+                        if (selectedImagePath != "Not found") {
+                            ContentResolver contentResolver = getContentResolver();
+
                             try {
-                                outFile = new FileOutputStream(file);
-                                //bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-                                outFile.flush();
-                                outFile.close();
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                                // Open the file input stream by the uri.
+                                InputStream inputStream = contentResolver.openInputStream(fileUri);
+
+                                // Get the bitmap.
+                                Bitmap imgBitmap = BitmapFactory.decodeStream(inputStream);
+                                Bitmap scaledBitmap = scaleDown(imgBitmap, 300, true);
+                                material_photo.setImageBitmap(scaledBitmap);
+                                inputStream.close();
+                            } catch (FileNotFoundException ex) {
+                                Log.e("FAILED", ex.getMessage(), ex);
+                            } catch (IOException ex) {
+                                Log.e("FAILED", ex.getMessage(), ex);
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
                     } else{
                         Log.e("Failed", "Failed Load Image From Camera!");

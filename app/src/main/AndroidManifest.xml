@@ -4,7 +4,6 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -28,7 +27,8 @@
             android:name=".view.Form_Material"
             android:exported="true"
             android:label="Form Material"
-            android:theme="@style/Theme.MaterialStore"/>
+            android:theme="@style/Theme.MaterialStore">
+        </activity>
         <activity
             android:name=".view.Login_Admin"
             android:exported="true"
