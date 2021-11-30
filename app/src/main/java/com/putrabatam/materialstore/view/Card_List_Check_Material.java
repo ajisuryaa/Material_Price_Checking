@@ -66,6 +66,9 @@ public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Che
 //                .into(holder.foto_pegawai);
         Picasso.get()
                 .load(Server_Configuration.address_image + data_material.photo_address)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .resize(300,300).centerCrop()
                 .into(holder.foto_material);
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override

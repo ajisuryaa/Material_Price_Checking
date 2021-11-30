@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.putrabatam.materialstore.utils.Server_Configuration;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,6 +64,7 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
     public void onBindViewHolder(@NonNull PastBookingViewHolder holder, final int position) {
         Material data_material = dataList.get(holder.getAdapterPosition());
         Log.i("Address Image Material", Server_Configuration.address_image + data_material.photo_address);
+
         holder.nama_material.setText(data_material.name);
         holder.harga.setText(String.valueOf(data_material.formatRupiah(data_material.price)));
         holder.satuan.setText(String.valueOf(data_material.satuan));
@@ -69,6 +72,9 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
 //                .into(holder.foto_pegawai);
         Picasso.get()
                 .load(Server_Configuration.address_image + data_material.photo_address)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .resize(300,300).centerCrop()
                 .into(holder.foto_material);
         holder.ubah.setOnClickListener(new View.OnClickListener() {
             @Override
