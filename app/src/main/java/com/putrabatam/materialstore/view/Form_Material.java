@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -112,25 +113,27 @@ public class Form_Material extends AppCompatActivity implements PopupMenu.OnMenu
                 BitmapDrawable drawable = (BitmapDrawable) material_photo.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
                 Material data_material = new Material();
-                data_material.set_material(
-                        id_material,
-                        name.getText().toString(),
-                        bitmap,
-                        Integer.valueOf(harga.getText().toString()),
-                        satuan.getText().toString()
-                );
-                Log.i("Nama", data_material.name);
-                Log.i("Satuan", data_material.satuan);
-                Log.i("Harga", String.valueOf(data_material.price));
-                String return_validation = data_material.validation_adding_material();
-                if (return_validation.equals("done")) {
-                    if (form_page.getStringExtra("type").equals("edit")) {
-                        Update_Material(data_material);
+                if(!harga.getText().toString().equals("")){
+                    data_material.set_material(
+                            id_material,
+                            name.getText().toString(),
+                            bitmap,
+                            Integer.parseInt(harga.getText().toString()),
+                            satuan.getText().toString()
+                    );
+                    String return_validation = data_material.validation_adding_material();
+                    if (return_validation.equals("done")) {
+                        if (form_page.getStringExtra("type").equals("edit")) {
+                            Update_Material(data_material);
+                        } else {
+                            Add_New_Material(data_material);
+                        }
                     } else {
-                        Add_New_Material(data_material);
+                        popUpMessage.validation_error(return_validation, Form_Material.this);
                     }
-                } else {
-                    popUpMessage.validation_error(return_validation, Form_Material.this);
+                } else{
+                    harga.setText("0");
+                    popUpMessage.validation_error("Harga yang anda cantumkan tidak sesuai!", Form_Material.this);
                 }
             }
         });
