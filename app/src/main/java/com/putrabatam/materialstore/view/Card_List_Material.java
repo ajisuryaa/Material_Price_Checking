@@ -42,7 +42,7 @@ import java.util.Map;
 public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.PastBookingViewHolder>{
 
     ProgressDialog progressDialog;
-    private ArrayList<Material> dataList;
+    ArrayList<Material> dataList;
     private Card_List_Material adapter;
 
     public Card_List_Material(ArrayList<Material> dataList) {
@@ -89,12 +89,12 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
             @Override
             public void onClick(View v) {
                 Log.i("Hapus Material: ", dataList.get(holder.getAdapterPosition()).id);
-                Delete_Material(dataList.get(holder.getAdapterPosition()).name, v.getContext());
+                Delete_Material(holder.getAdapterPosition(), dataList.get(holder.getAdapterPosition()).id, dataList.get(holder.getAdapterPosition()).name, v.getContext());
             }
         });
     }
 
-    public void Delete_Material(String nama_material, Context context){
+    public void Delete_Material(int adapter_position, String id_material, String nama_material, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Pesan Konfirmasi")
                 .setMessage("Apakah anda yakin ingin menghapus material " + nama_material + "?")
@@ -107,18 +107,18 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Request_delete_material(context, nama_material);
+                        Request_delete_material(context, id_material, adapter_position);
                     }
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    private void Request_delete_material(Context context, String id_material) {
+    private void Request_delete_material(Context context, String id_material, int adapter_position) {
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
         progressDialog.setCancelable(false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server_Configuration.address_delete_new_material,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server_Configuration.address_delete_material,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
@@ -129,7 +129,10 @@ public class Card_List_Material extends RecyclerView.Adapter<Card_List_Material.
                             JSONObject data = new JSONObject(obj.getString("data"));
                             Toast.makeText(context, "Berhasil menghapus material " + data.getString("id_material"), Toast.LENGTH_LONG).show();
                             if(status){
-                                ((Activity)context).recreate();
+                                dataList.remove(adapter_position);
+                                adapter.notifyItemRemoved(adapter_position);
+                                //adapter.notifyDataSetChanged();
+//                                ((Activity)context).recreate();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

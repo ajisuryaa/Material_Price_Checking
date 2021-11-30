@@ -107,52 +107,6 @@ public class Card_List_Check_Material extends RecyclerView.Adapter<Card_List_Che
         });
     }
 
-    private void Request_delete_material(Context context, String id_material) {
-        progressDialog.setMessage("Please Wait");
-        progressDialog.show();
-        progressDialog.setCancelable(false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server_Configuration.address_delete_new_material,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        try {
-                            JSONObject obj = new JSONObject(ServerResponse);
-                            Log.i("Hapus Material: ", ServerResponse);
-                            boolean status = obj.getBoolean("status");
-                            JSONObject data = new JSONObject(obj.getString("data"));
-                            Toast.makeText(context, "Berhasil menghapus material " + data.getString("id_material"), Toast.LENGTH_LONG).show();
-                            if(status){
-                                ((Activity)context).recreate();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        progressDialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        progressDialog.dismiss();
-                        Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
-                        Log.e("Error Volley", volleyError.toString());
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("id", id_material);
-                return params;
-            }
-        };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
-    }
-
     @Override
     public int getItemCount() {
         return (dataList != null) ? dataList.size() : 0;

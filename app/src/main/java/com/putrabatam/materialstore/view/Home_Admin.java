@@ -57,6 +57,39 @@ public class Home_Admin extends AppCompatActivity {
         adapter = new Card_List_Material(showListMaterial);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Home_Admin.this);
         recyclerView.setLayoutManager(layoutManager);
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+            @Override
+            public void onChanged() {
+                Log.i("ON changed", "true");
+                if(showListMaterial.size() <=0 ){
+                    body1.setVisibility(View.VISIBLE);
+                    body2.setVisibility(View.GONE);
+                } else {
+                    body1.setVisibility(View.GONE);
+                    body2.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                Log.i("ON item range inserted", "true");
+            }
+
+            @Override
+            public void onItemRangeRemoved(int positionStart, int itemCount) {
+                super.onItemRangeRemoved(positionStart, itemCount);
+                Log.i("ON item range removed", "true");
+                showListMaterial = adapter.dataList;
+                if(showListMaterial.size() <=0 ){
+                    body1.setVisibility(View.VISIBLE);
+                    body2.setVisibility(View.GONE);
+                } else {
+                    body1.setVisibility(View.GONE);
+                    body2.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         recyclerView.setAdapter(adapter);
         recyclerView.setActivated(true);
         Get_List_Material();
@@ -114,8 +147,6 @@ public class Home_Admin extends AppCompatActivity {
                             progressDialog.dismiss();
                             e.printStackTrace();
                         }
-                        Log.i("Jumlah Material", String.valueOf(showListMaterial.size()));
-                        Log.i("Value Name", showListMaterial.get(0).name);
                         adapter.notifyDataSetChanged();
                     }
                 },
