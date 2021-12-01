@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         rv_list_material = findViewById(R.id.list_view_main_material);
         total_price = findViewById(R.id.total_price_main);
         emplty_list_material = findViewById(R.id.empty_material_main);
-
+        check_permission();
         adapter = new Card_List_Check_Material(list_material);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         rv_list_material.setLayoutManager(layoutManager);
